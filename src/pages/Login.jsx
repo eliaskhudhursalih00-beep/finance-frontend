@@ -52,7 +52,7 @@ function Login({ setToken }) {
             <input
               className="input-field"
               type="password"
-              placeholder="••••••••"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -60,13 +60,13 @@ function Login({ setToken }) {
           </div>
 
           <button type="submit" className="btn mt-4" disabled={loading}>
-            {loading ? "Signing in…" : "Login"}
+            {loading ? "Signing in..." : "Login"}
           </button>
         </form>
 
         <div className="text-center mt-4">
-          <span className="text-muted">Do not have an account? </span>
-          <Link to="/register" className="text-success font-bold" style={{textDecoration: "none"}}>Register</Link>
+          <span className="text-muted">Don't have an account? </span>
+          <Link to="/register" className="text-success font-bold" style={{ textDecoration: "none" }}>Register</Link>
         </div>
       </div>
     </div>
