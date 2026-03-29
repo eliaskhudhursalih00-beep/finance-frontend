@@ -177,11 +177,11 @@ function Dashboard({ token, setToken }) {
     setSubmitting(true);
 
     try {
-      const payload = { 
-        amount: parseFloat(amount), 
-        category_id: parseInt(categoryId), 
-        type, 
-        description 
+      const payload = {
+        amount: parseFloat(amount),
+        category_id: parseInt(categoryId),
+        type,
+        description
       };
 
       if (editingId) {
@@ -232,7 +232,7 @@ function Dashboard({ token, setToken }) {
       `"${(t.description || "").replace(/"/g, '""')}"`
     ]);
 
-    const csvContent = "data:text/csv;charset=utf-8," 
+    const csvContent = "data:text/csv;charset=utf-8,"
       + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
 
     const encodedUri = encodeURI(csvContent);
@@ -287,12 +287,12 @@ function Dashboard({ token, setToken }) {
         <div className="flex items-center gap-4">
           <div className="form-group" style={{ marginBottom: 0 }}>
             <label style={{ marginBottom: 2, fontSize: '0.75rem' }}>Filter Month:</label>
-            <input 
-              type="month" 
-              className="input-field" 
+            <input
+              type="month"
+              className="input-field"
               style={{ padding: '0.4rem 0.6rem', width: 'auto' }}
-              value={filterMonth} 
-              onChange={(e) => setFilterMonth(e.target.value)} 
+              value={filterMonth}
+              onChange={(e) => setFilterMonth(e.target.value)}
             />
           </div>
           <button onClick={handleExportCSV} className="btn btn-secondary" style={{ width: 'auto' }}>Export CSV</button>
@@ -311,19 +311,19 @@ function Dashboard({ token, setToken }) {
         <div className="stat-card">
           <div className="stat-label">Total Balance</div>
           <div className="stat-value">
-            {loadingData ? <Skeleton className="skeleton-text" style={{ width: '80%' }} /> : `💰 $${balanceData.balance.toFixed(2)}`}
+            {loadingData ? <Skeleton className="skeleton-text" style={{ width: '80%' }} /> : `$${balanceData.balance.toFixed(2)}`}
           </div>
         </div>
         <div className="stat-card" style={{ borderLeft: '4px solid var(--success)' }}>
           <div className="stat-label">Total Income</div>
           <div className="stat-value text-success">
-            {loadingData ? <Skeleton className="skeleton-text" style={{ width: '80%' }} /> : `📈 $${balanceData.income.toFixed(2)}`}
+            {loadingData ? <Skeleton className="skeleton-text" style={{ width: '80%' }} /> : `+$${balanceData.income.toFixed(2)}`}
           </div>
         </div>
         <div className="stat-card" style={{ borderLeft: '4px solid var(--danger)' }}>
           <div className="stat-label">Total Expenses</div>
           <div className="stat-value text-danger">
-            {loadingData ? <Skeleton className="skeleton-text" style={{ width: '80%' }} /> : `📉 $${balanceData.expenses.toFixed(2)}`}
+            {loadingData ? <Skeleton className="skeleton-text" style={{ width: '80%' }} /> : `-$${balanceData.expenses.toFixed(2)}`}
           </div>
         </div>
       </div>
@@ -332,10 +332,10 @@ function Dashboard({ token, setToken }) {
         <div className="card">
           <h3 className="card-title">Monthly Budgets</h3>
           {loadingData ? (
-             <>
-               <Skeleton className="skeleton-text" style={{ marginBottom: '1rem' }} />
-               <Skeleton className="skeleton-text" style={{ marginBottom: '1rem' }} />
-             </>
+            <>
+              <Skeleton className="skeleton-text" style={{ marginBottom: '1rem' }} />
+              <Skeleton className="skeleton-text" style={{ marginBottom: '1rem' }} />
+            </>
           ) : budgets.length === 0 ? (
             <p className="text-muted text-center" style={{ padding: '2rem' }}>No budgets set for this month.</p>
           ) : (
@@ -353,11 +353,11 @@ function Dashboard({ token, setToken }) {
                       </span>
                     </div>
                     <div className="progress-container">
-                      <div 
+                      <div
                         className={`progress-fill ${isOver ? 'progress-over' : ''}`}
-                        style={{ 
-                          width: `${percent}%`, 
-                          backgroundColor: isOver ? 'var(--danger)' : (b.category_color || 'var(--primary)') 
+                        style={{
+                          width: `${percent}%`,
+                          backgroundColor: isOver ? 'var(--danger)' : (b.category_color || 'var(--primary)')
                         }}
                       />
                     </div>
@@ -368,36 +368,36 @@ function Dashboard({ token, setToken }) {
           )}
 
           <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
-             <h4 style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>Set Category Budget</h4>
-             <form onSubmit={handleSetBudget} className="flex gap-2">
-                <select 
-                  className="input-field" 
-                  style={{ flex: 1, padding: '0.5rem' }}
-                  value={budgetCategoryId} 
-                  onChange={(e) => setBudgetCategoryId(e.target.value)}
-                  required
-                >
-                  <option value="">Category</option>
-                  {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-                </select>
-                <input 
-                  type="number" 
-                  className="input-field" 
-                  style={{ flex: 1, padding: '0.5rem' }}
-                  placeholder="Limit $" 
-                  value={budgetAmount}
-                  onChange={(e) => setBudgetAmount(e.target.value)}
-                  required
-                />
-                <button type="submit" className="btn" style={{ width: 'auto', padding: '0.5rem 1rem' }} disabled={submitting}>Set</button>
-             </form>
+            <h4 style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>Set Category Budget</h4>
+            <form onSubmit={handleSetBudget} className="flex gap-2">
+              <select
+                className="input-field"
+                style={{ flex: 1, padding: '0.5rem' }}
+                value={budgetCategoryId}
+                onChange={(e) => setBudgetCategoryId(e.target.value)}
+                required
+              >
+                <option value="">Category</option>
+                {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+              </select>
+              <input
+                type="number"
+                className="input-field"
+                style={{ flex: 1, padding: '0.5rem' }}
+                placeholder="Limit $"
+                value={budgetAmount}
+                onChange={(e) => setBudgetAmount(e.target.value)}
+                required
+              />
+              <button type="submit" className="btn" style={{ width: 'auto', padding: '0.5rem 1rem' }} disabled={submitting}>Set</button>
+            </form>
           </div>
         </div>
 
         <div className="card">
           <h3 className="card-title">Recurring Transactions</h3>
           {loadingData ? (
-             <Skeleton className="skeleton-text" />
+            <Skeleton className="skeleton-text" />
           ) : recurringTransactions.length === 0 ? (
             <p className="text-muted text-center" style={{ padding: '2rem' }}>No recurring transactions set.</p>
           ) : (
@@ -413,7 +413,7 @@ function Dashboard({ token, setToken }) {
               ))}
             </div>
           )}
-          
+
           <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
             <h4 style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>Add Recurring</h4>
             <form onSubmit={handleCreateRecurring}>
@@ -452,7 +452,7 @@ function Dashboard({ token, setToken }) {
       </div>
 
       <div className="dashboard-grid">
-         <div className="card">
+        <div className="card">
           <h3 className="card-title">{editingId ? "Edit Transaction" : "Add Transaction"}</h3>
           <form onSubmit={saveTransaction}>
             <div className="flex gap-4">
@@ -478,32 +478,32 @@ function Dashboard({ token, setToken }) {
             </div>
 
             <div className="form-group">
-                <label>Category</label>
-                <select 
-                  className="input-field" 
-                  value={categoryId} 
-                  onChange={(e) => setCategoryId(e.target.value)} 
-                  required
-                >
-                  <option value="">Select a category</option>
-                  {categories.map(c => (
-                    <option key={c.id} value={c.id}>
-                      {c.name.charAt(0).toUpperCase() + c.name.slice(1)}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <label>Category</label>
+              <select
+                className="input-field"
+                value={categoryId}
+                onChange={(e) => setCategoryId(e.target.value)}
+                required
+              >
+                <option value="">Select a category</option>
+                {categories.map(c => (
+                  <option key={c.id} value={c.id}>
+                    {c.name.charAt(0).toUpperCase() + c.name.slice(1)}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              <div className="form-group">
-                <label>Description (Optional)</label>
-                <input
-                  type="text"
-                  className="input-field"
-                  placeholder="e.g., Lunch with team"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
+            <div className="form-group">
+              <label>Description (Optional)</label>
+              <input
+                type="text"
+                className="input-field"
+                placeholder="e.g., Lunch with team"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
 
             {formError && <p className="text-danger mb-4" style={{ fontSize: '0.875rem' }}>{formError}</p>}
 
@@ -536,22 +536,22 @@ function Dashboard({ token, setToken }) {
             {transactions.map((t) => (
               <div key={t.id} className="transaction-item">
                 <div className="flex items-center gap-4" style={{ width: "100%" }}>
-                  <div 
-                    style={{ 
-                      width: '12px', 
-                      height: '12px', 
-                      borderRadius: '50%', 
-                      backgroundColor: t.category_color || '#4F46E5' 
-                    }} 
+                  <div
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      borderRadius: '50%',
+                      backgroundColor: t.category_color || '#4F46E5'
+                    }}
                   />
                   <div className="flex justify-between items-center" style={{ width: "100%" }}>
                     <div>
-                        <h4>{t.category_name || t.category}</h4>
-                        {t.description && (
-                          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '2px 0 0' }}>
-                            {t.description}
-                          </p>
-                        )}
+                      <h4>{t.category_name || t.category}</h4>
+                      {t.description && (
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '2px 0 0' }}>
+                          {t.description}
+                        </p>
+                      )}
                       <p style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
                         {new Date(t.created_at).toLocaleDateString()}
                       </p>
